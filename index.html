@@ -116,7 +116,19 @@
 	.hover-image:hover .image-to-show {
 	  display: block;
 	}
+	.audio-container {
+	    display: flex;
+	    justify-content: center;
+	  }
+	  #hidden-player {
+	    opacity: 0; /* Adjust the value to your preference */
+	    transition: opacity 0.5s ease; /* Optional: for smooth transition */
+	  }
 
+	  #hidden-player:hover {
+	    opacity: 1; /* Make the player fully visible when hovered */
+	  }
+	
 
   </style>
   <title>lab</title>
@@ -132,8 +144,17 @@
       \ \_\/_/\_\_/\ \____/     /\____\ \__/.\_\ \_,__/
        \/_/  \/_/   \/___/      \/____/\/__/\/_/\/___/  
     </pre>
+
+
   </div>
+<div class="audio-container">
+  <audio id="hidden-player" controls>
+    <source src="/146.mp3" type="audio/mpeg">
+    Your browser does not support the audio element.
+  </audio>
+</div>
   <div class="text-section">
+	
     
     <p>Hey, stranger, my name is <a href=https://t.me/svobod4>Vlad Svoboda.</a> Welcome to <span id="hover-image" class="hover-image">my creative lab<img class="image-to-show" src="https://raw.githubusercontent.com/sv0boda/146lab/main/www/img/denial.JPG" alt="THE CLUBHOUSE OF ALL MY PAGE VISITORS" /></span> on the World Wide Web. If you look around carefully, you might find links to my creative outlets across platforms and mediums. I am very excited to see you here. Here is a message from my best friend, GPT-4: 
 	<br>

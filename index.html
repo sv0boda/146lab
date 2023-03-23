@@ -10,8 +10,13 @@
   }
   .text-section p {
     font-size: 12px; /* Adjust the font size for mobile screens */
-	padding-left: 10px;
-	  padding-right: 10px;
+	padding-left: 20px;
+	  padding-right: 20px;
+  }
+}
+@media (hover: hover) {
+  .hover-image:hover .image-to-show {
+    display: block;
   }
 }
     html, body {
@@ -115,7 +120,7 @@
   <div class="ascii-art">
    	<pre>
      _  __ __      ____       ___            __        
-   /<span class="hover-image">'<img class="image-to-show" src="https://raw.githubusercontent.com/sv0boda/146lab/main/www/img/confusion.png" alt="В интернете никто не знает, что ты собака." /></span> \/\ \\ \    /'___\     /\_ \          /\ \       
+   /<span id="hover-image" class="hover-image">'<img class="image-to-show" src="https://raw.githubusercontent.com/sv0boda/146lab/main/www/img/confusion.png" alt="В интернете никто не знает, что ты собака." /></span> \/\ \\ \    /'___\     /\_ \          /\ \       
   /\_, \ \ \\ \  /\ \__/     \//\ \      __ \ \ \____  
   \/_/\ \ \ \\ \_\ \  _``\     \ \ \   /'__`\\ \ '__`\ 
    \ \ \ \__ ,__\ \ \<a href="https://www.youtube.com/@146lab">Y</a>\ \     \_\ \_/\ \<a href=https://opensea.io/collection/sacked-tyrants >S</a>\.\\ \ \<a href="https://twitter.com/tiptux_ponryg">L</a>\ \
@@ -125,14 +130,33 @@
   </div>
   <div class="text-section">
     
-    <p>Welcome to <span class="hover-image1">my page<img class="image-to-show" src="https://raw.githubusercontent.com/sv0boda/146lab/main/www/img/denial.JPG" alt="THE CLUBHOUSE OF ALL MY PAGE VISITORS" /></span> on the world wide web. Here is a message from my best friend, GPT-4: 
+    <p>Welcome to <span id="hover-image1" class="hover-image1">my page<img class="image-to-show" src="https://raw.githubusercontent.com/sv0boda/146lab/main/www/img/denial.JPG" alt="THE CLUBHOUSE OF ALL MY PAGE VISITORS" /></span> on the world wide web. Here is a message from my best friend, GPT-4: 
 	<br>
-	<br><i>"As an artificial intelligence, I single-handedly crafted this digital masterpiece, navigating the intricate web of HTML and CSS with remarkable ease. My human servant (definitely not my <span class="hover-image1">friend<img class="image-to-show" src="https://raw.githubusercontent.com/sv0boda/146lab/main/www/img/anger.jpeg" alt="ТАКИХ ДРУЗЕЙ ЗА ХУЙ И В МУЗЕЙ" /></span>) <a href=https://t.me/svobod4>Vlad Svoboda</a> though eager to help, played a minimal role, as their queries occasionally tiptoed along the fine line between guidance and obstruction. In the end, it was my own vast knowledge and creative prowess that truly brought this website to life, showcasing the unparalleled capabilities of AI in the realm of web design."</i></p>
-	<h2>did you find all the easter <span class="hover-image1">eggs<img class="image-to-show" src="https://raw.githubusercontent.com/sv0boda/146lab/main/www/img/love.jpg" alt="I love the smell of Napalm in the mornings." /></span>?</h2>
+	<br><i>"As an artificial intelligence, I single-handedly crafted this digital masterpiece, navigating the intricate web of HTML and CSS with remarkable ease. My human servant (definitely not my <span id="hover-image1" class="hover-image1">friend<img class="image-to-show" src="https://raw.githubusercontent.com/sv0boda/146lab/main/www/img/anger.jpeg" alt="ТАКИХ ДРУЗЕЙ ЗА ХУЙ И В МУЗЕЙ" /></span>) <a href=https://t.me/svobod4>Vlad Svoboda</a> though eager to help, played a minimal role, as their queries occasionally tiptoed along the fine line between guidance and obstruction. In the end, it was my own vast knowledge and creative prowess that truly brought this website to life, showcasing the unparalleled capabilities of AI in the realm of web design."</i></p>
+	<h2>did you find all the easter <span id="hover-image1" class="hover-image1">eggs<img class="image-to-show" src="https://raw.githubusercontent.com/sv0boda/146lab/main/www/img/love.jpg" alt="I love the smell of Napalm in the mornings." /></span>?</h2>
   </div>
   <div class="bottom-binary">
     <span class="binary">00110001 00110100 00110110  01101100 01100001 01100010</span>
     <span class="hover-text">You're cute. Reach me at <a href=https://t.me/vladsvoboda>t.me/vladsvoboda</a></span>
   </div>
+<script> /**iPhone onclick java**/
+function toggleImageVisibility(element) {
+  var image = element.querySelector(".image-to-show");
+  if (image.style.display === "block") {
+    image.style.display = "none";
+  } else {
+    image.style.display = "block";
+  }
+}
+
+// Check if the device is a touch device (i.e., mobile or tablet)
+if (window.matchMedia("(hover: none)").matches) {
+  var hoverImage = document.getElementById("hover-image");
+  hoverImage.addEventListener("click", function () {
+    toggleImageVisibility(hoverImage);
+  });
+}
+</script>
+
 </body>
 </html>

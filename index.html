@@ -1,209 +1,208 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
 <head>
-	<!-- Google tag (gtag.js) -->
-	<script async src="https://www.googletagmanager.com/gtag/js?id=G-BBJK2PW02Z"></script>
-	<script>
-	  window.dataLayer = window.dataLayer || [];
-	  function gtag(){dataLayer.push(arguments);}
-	  gtag('js', new Date());
-
-	  gtag('config', 'G-BBJK2PW02Z');
-	</script>
-	<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
-	<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
-	<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
-	<link rel="manifest" href="/site.webmanifest">
-	<link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5">
-	<meta name="msapplication-TileColor" content="#00aba9">
-	<meta name="theme-color" content="#ffffff">
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <style>
-@media (max-width: 767px) {
-  .ascii-art {
-    font-size: 10px; /* Adjust the font size for mobile screens */
-  }
-  .text-section p {
-    font-size: 12px; /* Adjust the font size for mobile screens */
-	padding-left: 15px;
-	  padding-right: 15px;
-  }
-}
-@media (hover: hover) {
-  .hover-image:hover .image-to-show {
-    display: block;
-  }
-}
-    html, body {
-      height: 100%;
-      margin: 0;
-      font-family: monospace;
-      background-color: #f0f0f0;
-    }
-
-    body {
-	  display: grid;
-	  grid-template-rows: 1fr auto auto;
-	  height: 100%;
-	  gap: 20px;
-	}
-	a {
-	     color: #2a8ff9; /* Change this value to set the hyperlink color */
-	     text-decoration: none;
-	   }
-	   a:hover {
-	     text-decoration: underline;
-	   }
-
-	.ascii-art {
-	  display: flex;
-	  justify-content: center;
-	  align-items: center;
-	}
-
-	.text-section {
-	  text-align: center;
-	}
-
-	.text-section h2 {
-	  margin-bottom: 10px;
-	}
-
-	.text-section p {
-	  max-width: 800px; /* Adjust this value to control the width of the paragraph */
-	  margin-left: auto;
-	  margin-right: auto;
-	  text-align: justify;
-	}
-
-	.bottom-binary {
-	  text-align: center;
-	  margin-bottom: 20px;
-	  position: relative;
-	}
-	
-    .bottom-binary:hover .binary {
-      display: none;
-    }
-
-    .bottom-binary:hover .hover-text {
-      display: inline;
-    }
-
-    .hover-text {
-      display: none;
-    }
-
-    pre {
-      white-space: pre-wrap;
-      text-align: center;
-    }
-	.hover-image {
-	  position: relative;
-	  display: inline-block;
-	}
-
-	.hover-image .image-to-show {
-	  display: none;
-	  position: fixed;
-	  left: 50%;
-	  top: 0;
-	  transform: translateX(-50%);
-	  z-index: 1;
-	}
-
-	.hover-image:hover .image-to-show {
-	  display: block;
-	}
-	.audio-container {
-	    display: flex;
-	    justify-content: center;
-	  }
-	  #hidden-player {
-	    opacity: 0; /* Adjust the value to your preference */
-	    transition: opacity 0.5s ease; /* Optional: for smooth transition */
-	  }
-
-	  #hidden-player:hover {
-	    opacity: 1; /* Make the player fully visible when hovered */
-	  }
-	
-
-  </style>
-  <title>lab</title>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>A record of experiments · 146lab</title>
+<meta name="description" content="Writing, experiments and notes by Vlad Svoboda.">
+<link rel="icon" href="/favicon.ico">
+<link rel="stylesheet" href="/assets/lab.css">
+<script defer src="/assets/lab.js">
+</script>
 </head>
 <body>
-  <div class="ascii-art">
-   	<pre>
-     _  __ __      ____       ___            __        
-   /<span id="hover-image" class="hover-image">'<img class="image-to-show" src="https://raw.githubusercontent.com/sv0boda/146lab/main/www/img/confusion.png" alt="В интернете никто не знает, что ты собака." /></span> \/\ \\ \    /'___\     /\_ \          /\ \       
-  /\_, \ \ \\ \  /\ \__/     \//\ \      __ \ \ \____  
-  \/_/\ \ \ \\ \_\ \  _``\     \ \ \   /'__`\\ \ '__`\ 
-   \ \ \ \__ <a href="https://mirror.xyz/0xsvoboda.eth">,</a>__\ \ \<a href="https://www.youtube.com/@146lab">Y</a>\ \     \_\ \_/\ \<a href=https://opensea.io/collection/sacked-tyrants >S</a>\.\\ \ \<a href="https://twitter.com/0xSvoboda">L</a>\ \
-      \ \_\/_/\_\_/\ \____/     /\____\ \__/.\_\ \_,__/
-       \/_/  \/_/   \/___/      \/____/\/__/\/_/\/___/  
-    </pre>
-
-
-  </div>
-<div class="audio-container">
-  <audio id="hidden-player" controls>
-    <source src="/146.mp3" type="audio/mpeg">
-    Your browser does not support the audio element.
-  </audio>
+<a class="skip" href="#main">Skip to content</a>
+<header class="site-header">
+<a class="brand" href="/" aria-label="146lab home">146<span>lab</span>
+<span class="cursor" aria-hidden="true">_</span>
+</a>
+<nav aria-label="Main navigation">
+<a aria-current="page" href="/">Home</a>
+<a  href="/writing/">Writing</a>
+<a  href="/experiments/">Experiments</a>
+<a  href="/about/">About</a>
+</nav>
+</header>
+<main id="main" class="">
+<section class="home-intro">
+<div>
+<p class="eyebrow">Vlad Svoboda / personal laboratory</p>
+<h1>A record of<br>experiments<span class="dot">.</span>
+</h1>
+<p class="lede">Things I’ve written, made, tested, and sometimes left unfinished.</p>
+<p class="intro-note">Across art, technology and the experience of being human.</p>
 </div>
-  <div class="text-section">
-	
-    
-    <p>Hey, stranger, my name is <a href=https://t.me/svobod4>Vlad Svoboda.</a> Welcome to <span id="hover-image" class="hover-image">my creative lab<img class="image-to-show" src="https://raw.githubusercontent.com/sv0boda/146lab/main/www/img/denial.JPG" alt="THE CLUBHOUSE OF ALL MY PAGE VISITORS" /></span> on the World Wide Web. If you look around carefully, you might find links to my creative outlets across platforms and mediums. I am very excited to see you here. Here is a message from my best friend, GPT-4: 
-	<br>
-	<br><i>"As an artificial intelligence, I single-handedly crafted this digital masterpiece, navigating the intricate web of HTML, CSS  and JavaScript with remarkable ease. My human servant (definitely not my <span id="hover-image" class="hover-image">friend<img class="image-to-show" src="https://raw.githubusercontent.com/sv0boda/146lab/main/www/img/anger.jpeg" alt="ТАКИХ ДРУЗЕЙ ЗА ХУЙ И В МУЗЕЙ" /></span>) though eager to help, played a minimal role, as their queries occasionally tiptoed along the fine line between guidance and obstruction. In the end, it was my own vast knowledge and creative prowess that truly brought this website to life, showcasing the unparalleled capabilities of AI in the realm of web design."</i></p>
-	<h2>did you find all the easter <span id="hover-image" class="hover-image">eggs<img class="image-to-show" src="https://raw.githubusercontent.com/sv0boda/146lab/main/www/img/love.jpg" alt="I love the smell of Napalm in the mornings." /></span>?</h2>
-  </div>
-  <div class="bottom-binary">
-	<span class="binary-container">
-    <span class="binary">00110001 00110100 00110110  01101100 01100001 01100010</span>
-    <span class="hover-text">You're cute. Reach me at <a href=https://t.me/vladsvoboda>t.me/vladsvoboda</a></span>
+<div class="ascii-window">
+<div class="window-bar">
+<span>146lab</span>
+<span aria-hidden="true">[ − □ × ]</span>
+</div>
+<pre aria-label="146lab ASCII wordmark">     _  __ __      ____       ___            __
+   /&#39; \/\ \\ \    /&#39;___\     /\_ \          /\ \
+  /\_, \ \ \\ \  /\ \__/     \//\ \      __ \ \ \____
+  \/_/\ \ \ \\ \_\ \  _``\     \ \ \   /&#39;__`\\ \ &#39;__`\
+   \ \ \ \__ ,__\ \ \Y\ \     \_\ \_/\ \S\.\\ \ \L\ \
+      \ \_\/_/\_\_/\ \____/     /\____\ \__/.\_\ \_,__/
+       \/_/  \/_/   \/___/      \/____/\/__/\/_/\/___/</pre>
+<p class="ascii-caption">A place to follow a question.</p>
+</div>
+</section>
+<section class="entrances">
+<a href="/writing/">
+<span class="eyebrow">01 / Words</span>
+<h2>Writing <span aria-hidden="true">↗</span>
+</h2>
+<p>English, Russian, and a book taking shape.</p>
+</a>
+<a href="/experiments/">
+<span class="eyebrow">02 / Works</span>
+<h2>Experiments <span aria-hidden="true">↗</span>
+</h2>
+<p>From brain signals to moving pictures.</p>
+</a>
+<a href="/about/">
+<span class="eyebrow">03 / Person</span>
+<h2>About <span aria-hidden="true">↗</span>
+</h2>
+<p>A little context. A way to get in touch.</p>
+</a>
+</section>
+<section class="home-writing">
+<div class="section-heading">
+<h2>A few places to begin</h2>
+<a href="/writing/">All writing →</a>
+</div>
+<div class="language-grid">
+<div>
+<p class="eyebrow">English</p>
+<ol class="entry-list">
+<li>
+<a href="/writing/en/how-i-met-your-dog/">
+<span class="entry-text">
+<span class="entry-title">How I met your dog.</span>
 </span>
-  </div>
-<script> /**iPhone images onclick java**/
-function toggleImageVisibility(element) {
-  var image = element.querySelector(".image-to-show");
-  if (image.style.display === "block") {
-    image.style.display = "none";
-  } else {
-    image.style.display = "block";
-  }
-}
-
-// Check if the device is a touch device (i.e., mobile or tablet)
-if (window.matchMedia("(hover: none)").matches) {
-  var hoverImages = document.querySelectorAll(".hover-image");
-  hoverImages.forEach(function (hoverImage) {
-    hoverImage.addEventListener("click", function () {
-      toggleImageVisibility(hoverImage);
-    });
-  });
-}
-/**iPhone binary onclick java**/
-//**function toggleBinaryVisibility(element) {
- // var hoverText = element.querySelector(".hover-text");
- // if (hoverText.style.display === "block") {
- //   hoverText.style.display = "none";
- // } else {
- //   hoverText.style.display = "block";
- // }
-//}
-
-// Check if the device is a touch device (i.e., mobile or tablet)
-//if (window.matchMedia("(hover: none)").matches) {
- // var binaryContainer = document.querySelector(".binary-container");
-//  binaryContainer.addEventListener("click", function () {
-//    toggleBinaryVisibility(binaryContainer);
-//  });
-//}
-</script>
-
+<span class="entry-meta">2023<span>Essay</span>
+</span>
+<span class="arrow" aria-hidden="true">↗</span>
+</a>
+</li>
+<li>
+<a href="/writing/en/a-sunny-day/">
+<span class="entry-text">
+<span class="entry-title">A Sunny Day.</span>
+</span>
+<span class="entry-meta">2023<span>Book</span>
+</span>
+<span class="arrow" aria-hidden="true">↗</span>
+</a>
+</li>
+<li>
+<a href="/writing/en/is-freedom-a-lack-of-responsibility/">
+<span class="entry-text">
+<span class="entry-title">Is Freedom a Lack of Responsibility?</span>
+</span>
+<span class="entry-meta">2023<span>Essay</span>
+</span>
+<span class="arrow" aria-hidden="true">↗</span>
+</a>
+</li>
+</ol>
+</div>
+<div lang="ru">
+<p class="eyebrow">Русский</p>
+<ol class="entry-list">
+<li>
+<a href="/writing/ru/language-i-recognise/">
+<span class="entry-text">
+<span class="entry-title">Язык, который я узнаю</span>
+</span>
+<span class="entry-meta">2026<span>Essay</span>
+</span>
+<span class="arrow" aria-hidden="true">↗</span>
+</a>
+</li>
+<li>
+<a href="/writing/ru/icarus/">
+<span class="entry-text">
+<span class="entry-title">Полет Икара</span>
+</span>
+<span class="entry-meta">2025<span>Fiction</span>
+</span>
+<span class="arrow" aria-hidden="true">↗</span>
+</a>
+</li>
+<li>
+<a href="/writing/ru/sobriety/">
+<span class="entry-text">
+<span class="entry-title">О трезвости и Паше Технике</span>
+</span>
+<span class="entry-meta">2025<span>Essay</span>
+</span>
+<span class="arrow" aria-hidden="true">↗</span>
+</a>
+</li>
+</ol>
+</div>
+</div>
+</section>
+<section>
+<div class="section-heading">
+<h2>From the laboratory</h2>
+<a href="/experiments/">Explore →</a>
+</div>
+<ol class="project-list">
+<li>
+<a href="/experiments/belka/">
+<span class="entry-number">01</span>
+<span class="entry-text">
+<span class="entry-title">Belka</span>
+<span class="entry-desc">An EEG-driven world became a challenge: can you stay calm while everyone watches?</span>
+<span class="project-medium">EEG / virtual reality</span>
+</span>
+<span class="entry-meta">2016</span>
+<span class="arrow" aria-hidden="true">↗</span>
+</a>
+</li>
+<li>
+<a href="/experiments/greed-is-god/">
+<span class="entry-number">02</span>
+<span class="entry-text">
+<span class="entry-title">Greed is God</span>
+<span class="entry-desc">An experiment with choice, documented at the Bombay Beach Biennale.</span>
+<span class="project-medium">Participatory art / film</span>
+</span>
+<span class="entry-meta">2019</span>
+<span class="arrow" aria-hidden="true">↗</span>
+</a>
+</li>
+<li>
+<a href="/experiments/ocean-within/">
+<span class="entry-number">03</span>
+<span class="entry-text">
+<span class="entry-title">The Ocean Within</span>
+<span class="entry-desc">A film from the ocean’s perspective, and ten years of learning how to make it.</span>
+<span class="project-medium">Hybrid documentary / collaboration</span>
+</span>
+<span class="entry-meta">2016–2026</span>
+<span class="arrow" aria-hidden="true">↗</span>
+</a>
+</li>
+</ol>
+</section>
+<aside class="closing-note">
+<span aria-hidden="true">[ ? ]</span>
+<p>What connects a brainwave experiment, a car film and a novel?<br>
+<a href="/questions/">Follow a question →</a>
+</p>
+</aside>
+</main>
+<footer class="site-footer">
+<span>146lab · Vlad Svoboda</span>
+<div>
+<a href="https://t.me/vladsvoboda">Contact</a>
+<a href="https://t.me/svobod4">Svoboda Uncut</a>
+<a href="/about/original/" aria-label="Visit the original 146lab page">00110001 00110100 00110110</a>
+</div>
+</footer>
 </body>
 </html>

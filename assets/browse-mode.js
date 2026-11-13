@@ -5,7 +5,7 @@ for(const panel of document.querySelectorAll('[data-archive-browse]')){
   panel.closest('.index-shelves')?.querySelectorAll('[data-browse-content]').forEach(p=>p.hidden=p.dataset.browseContent!==mode);
   panel.querySelectorAll('[data-browse-panel]').forEach(p=>p.hidden=p.dataset.browsePanel!==mode);
   panel.querySelectorAll('[data-browse-mode]').forEach(b=>b.setAttribute('aria-pressed',String(b.dataset.browseMode===mode)));
-  panel.querySelector('[data-browse-explanation]').textContent=mode==='threads'?'The same work, connected by questions. A piece can appear more than once.':'Writing, experiments and personal projects.';
+  panel.querySelector('[data-browse-explanation]').textContent=mode==='threads'?'The same work, connected by questions. A piece can appear more than once.':'Writing, projects and personal work.';
  }
  panel.querySelectorAll('[data-browse-mode]').forEach(b=>b.addEventListener('click',()=>{select(b.dataset.browseMode);try{sessionStorage.setItem('146lab-browse',mode);}catch{}}));
  select(mode);

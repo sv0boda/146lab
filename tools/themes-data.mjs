@@ -16,6 +16,7 @@ export const themes = [
  {id:'feeling', short:'Feeling', q:'Can you feel what I feel?',
   intro:'A colour, a room, a story, a person paying attention. I am interested in how little it can take for an internal experience to reach someone else, and how much gets lost or changed on the way.',
   entries:[
+   ['/experiments/diistvo/','Acting practice becomes a way to express emotion and make deeper connections.'],
    ['/experiments/belka/','Brain activity becomes a changing colour. The people watching make something of that signal.'],
    ['/writing/en/soul-internet/','A personal account of emotional connection, acting and the difficulty of letting go of control.'],
    ['/experiments/waldorf-project/','The same work can feel extraordinary or unbearable depending on the room and the trust it creates.'],
@@ -49,6 +50,7 @@ export const themes = [
   entries:[
    ['/writing/en/how-i-met-your-dog/','Helping an injured dog becomes an inconvenient, demanding and increasingly personal commitment.'],
    ['/personal/kurin/','Mykola’s craft and my concern for comfort meet in a place that now supports other people too.'],
+   ['/experiments/diistvo/','A teacher’s skill does not replace the need for preparation, support and shared responsibility.'],
    ['/experiments/fml48/','The event ends, but developing a winner’s project takes much longer. Its value is not only in a finished film.'],
    ['/experiments/waldorf-project/','An audience having a wonderful time does not settle whether the working relationship can continue.'],
    ['/writing/en/isa-my-chechen-friend/','A friendship complicates an inherited prejudice, then violence changes the person I knew.'],
@@ -59,6 +61,7 @@ export const themes = [
   entries:[
    ['/writing/en/svoboda/','Meditation, therapy, acting and sobriety as ways of loosening the conditioning I grew up with.'],
    ['/writing/ru/sobriety/','Getting sober, and learning to build a life I want to stay present for.'],
+   ['/experiments/diistvo/','Acting becomes the missing piece in my sobriety, then a practice I want to share with other people.'],
    ['/writing/en/soul-internet/','Acting brings me into contact with desire and fear I thought I had already understood.'],
    ['/experiments/greed-is-god/','The first piece I could look at and feel that I had become an artist.'],
    ['/personal/apartment/','After getting sober, making a home becomes a way of finding out how I want to live.'],

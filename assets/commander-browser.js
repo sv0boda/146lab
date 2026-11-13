@@ -1,6 +1,6 @@
 (async()=>{
  const $=s=>document.querySelector(s),base='/study/commander/',browser=$('#folder-browser'),main=$('#main');
- const typing=e=>e.target.closest('input,textarea,select,[contenteditable=true],video,audio,[role=slider]');
+ const typing=e=>e.target.isContentEditable||e.target.closest('input,textarea,select,video,audio,[role=slider]');
  let data;try{const r=await fetch('/assets/lab-directory.json');if(!r.ok)throw Error();data=await r.json();}catch{return;}
  if(browser||$('.reading-file-list')){const {initTree}=await import('./commander-tree.js');initTree(data);return;}
  const {folders,pages}=data,route=document.body.dataset.route;
@@ -9,7 +9,7 @@
  let dir=folders[params.get('folder')]?params.get('folder'):(browser?'root':canonical(route)),active=null;
  const list=browser?$('#folder-list'):$('.reading-file-list'),search=browser?$('#folder-search'):$('#reading-file-search');
  const pane=browser?$('.file-pane'):$('.commander-reading-index');
- if(!list){document.addEventListener('keydown',e=>{if(e.ctrlKey||e.metaKey||e.altKey||typing(e))return;const a=[...document.querySelectorAll('[data-fkey]')].find(a=>a.dataset.fkey===e.key);if(a){e.preventDefault();location.href=a.href;}else if(e.key==='Escape'){e.preventDefault();location.href=base+'?folder='+encodeURIComponent(dir)+'&selected='+encodeURIComponent(route);}});return;}
+ if(!list){document.addEventListener('keydown',e=>{if(e.defaultPrevented||e.ctrlKey||e.metaKey||e.altKey||e.isComposing||typing(e)||document.querySelector('dialog[open]')||document.fullscreenElement)return;if(['q','e'].includes(e.key.toLowerCase())){e.preventDefault();if(!e.repeat)location.href=base+'?browse='+(e.key.toLowerCase()==='q'?'sections':'threads');return;}const a=[...document.querySelectorAll('[data-fkey]')].find(a=>a.dataset.fkey===e.key);if(a){e.preventDefault();location.href=a.href;}else if(e.key==='Escape'){e.preventDefault();location.href=base+'?folder='+encodeURIComponent(dir)+'&selected='+encodeURIComponent(route);}});return;}
  const page=url=>pages.find(p=>p.url===url)||{title:url,url,desc:''};
  const entries=()=>folders[dir].items.map(x=>x.folder?{...x,title:x.title+'/'}:{...page(x.url),...x});
  const folderURL=(id,selected)=>base+'?folder='+encodeURIComponent(id)+(selected?'&selected='+encodeURIComponent(selected):'');

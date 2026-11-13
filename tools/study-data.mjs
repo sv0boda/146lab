@@ -16,8 +16,8 @@ async function collect(dir){for(const f of await fs.readdir(path.join(site,dir),
   const html=await fs.readFile(path.join(site,rel),'utf8'),main=html.match(/<main\b[^>]*>([\s\S]*?)<\/main>/),h1=html.match(/<h1[^>]*>([\s\S]*?)<\/h1>/);
   if(!main||!h1||/http-equiv="refresh"/i.test(html))continue;
   const url='/'+rel.replace(/index.html$/,'');
-  const titles={'/writing/en/':'Articles','/writing/':'Writing','/writing/book/':'The book','/experiments/':'Experiments','/experiments/belka/ru/':'Belka (Russian)','/about/':'About Vlad','/questions/':'Threads'};
-  const kind=/^\/(writing\/(en|ru)|experiments)\/[^/]+\//.test(url)?(url.startsWith('/experiments/')?'Experiment':'Writing'):'Index';
+  const titles={'/writing/en/':'Articles','/writing/':'Writing','/writing/book/':'The book','/experiments/':'Projects','/experiments/belka/ru/':'Belka (Russian)','/about/':'About Vlad','/questions/':'Threads'};
+  const kind=/^\/(writing\/(en|ru)|experiments)\/[^/]+\//.test(url)?(url.startsWith('/experiments/')?'Project':'Writing'):'Index';
   const translations=await translatedBodies(url,main[1]);
   pages.push({url,translations,languages:[html.match(/<html lang="([^"]+)"/)?.[1]||'en',...Object.keys(translations)],title:titles[url]||plain(h1[1]),body:main[1],reading:/<main[^>]*reading-page/.test(html),lang:html.match(/<html lang="([^"]+)"/)?.[1]||'en',kind:url.startsWith('/personal/')&&url!=='/personal/'?'Personal':kind,
    desc:plain(html.match(/<p class="lede">([\s\S]*?)<\/p>/)?.[1]||html.match(/<meta name="description" content="([^"]*)"/)?.[1]||''),
@@ -29,7 +29,7 @@ for(const dir of ['writing','experiments','personal','about','questions','update
 export const get=url=>pages.find(p=>p.url===url);
 export const logo=(await fs.readFile(path.join(site,'about/original/index.html'),'utf8')).match(/<pre>([\s\S]*?)<\/pre>/)[1].replace(/<[^>]*>/g,'').replace(/^\n/,'').replace(/[YSL]/g,' ').trimEnd();
 export const questions=themes;
-export const selected=['/experiments/belka/','/writing/en/how-i-met-your-dog/','/experiments/greed-is-god/','/experiments/ocean-within/','/writing/en/a-sunny-day/'].map(get);
+export const selected=['/experiments/belka/','/writing/en/how-i-met-your-dog/','/experiments/greed-is-god/','/experiments/ocean-within/','/writing/en/a-sunny-day/','/experiments/diistvo/'].map(get);
 export const variants=[
  {id:'index',code:'A1',name:'Index',family:'archive',desc:'A compact directory. White space, blue links, quiet reading.',gesture:'Browse a name; follow its connections.'},
  {id:'atlas',code:'A2',name:'Atlas',family:'archive',desc:'Text makes the map. Branches, coordinates and paths between work.',gesture:'Choose a question to trace a different route.'},

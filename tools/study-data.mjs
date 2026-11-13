@@ -1,3 +1,4 @@
+import {translatedBodies} from './translations.mjs';
 import './build-updates.mjs';
 import './build-themes.mjs';
 import {themes} from './themes-data.mjs';
@@ -10,14 +11,15 @@ export const plain=s=>s.replace(/<[^>]*>/g,'').replace(/&amp;/g,'&').replace(/&#
 export const egg='.. / .-.. --- ...- . / -.-- --- ..-';
 export const pages=[];
 async function collect(dir){for(const f of await fs.readdir(path.join(site,dir),{withFileTypes:true})){
- const rel=path.posix.join(dir,f.name);if(rel==='about/original')continue;
+ const rel=path.posix.join(dir,f.name);if(rel==='about/original'||rel==='experiments/belka/ru')continue;
  if(f.isDirectory())await collect(rel);else if(f.name==='index.html'){
   const html=await fs.readFile(path.join(site,rel),'utf8'),main=html.match(/<main\b[^>]*>([\s\S]*?)<\/main>/),h1=html.match(/<h1[^>]*>([\s\S]*?)<\/h1>/);
   if(!main||!h1||/http-equiv="refresh"/i.test(html))continue;
   const url='/'+rel.replace(/index.html$/,'');
   const titles={'/writing/en/':'Articles','/writing/':'Writing','/writing/book/':'The book','/experiments/':'Experiments','/experiments/belka/ru/':'Belka (Russian)','/about/':'About Vlad','/questions/':'Threads'};
   const kind=/^\/(writing\/(en|ru)|experiments)\/[^/]+\//.test(url)?(url.startsWith('/experiments/')?'Experiment':'Writing'):'Index';
-  pages.push({url,title:titles[url]||plain(h1[1]),body:main[1],reading:/<main[^>]*reading-page/.test(html),lang:html.match(/<html lang="([^"]+)"/)?.[1]||'en',kind:url.startsWith('/personal/')&&url!=='/personal/'?'Personal':kind,
+  const translations=await translatedBodies(url,main[1]);
+  pages.push({url,translations,languages:[html.match(/<html lang="([^"]+)"/)?.[1]||'en',...Object.keys(translations)],title:titles[url]||plain(h1[1]),body:main[1],reading:/<main[^>]*reading-page/.test(html),lang:html.match(/<html lang="([^"]+)"/)?.[1]||'en',kind:url.startsWith('/personal/')&&url!=='/personal/'?'Personal':kind,
    desc:plain(html.match(/<p class="lede">([\s\S]*?)<\/p>/)?.[1]||html.match(/<meta name="description" content="([^"]*)"/)?.[1]||''),
    excerpt:plain(main[1].match(/<(?:article|div) class="prose"[^>]*>\s*<p>([\s\S]*?)<\/p>/)?.[1]||''),
    date:(plain(html.match(/<time[^>]*>(.*?)<\/time>/s)?.[1]||html.match(/<p class="eyebrow">(.*?)<\/p>/s)?.[1]||'').match(/20\d\d/)||['—'])[0]});

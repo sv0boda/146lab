@@ -52,7 +52,9 @@ export function initTree({folders,pages}){
  search.addEventListener('input',()=>{render();if(rows.length)show(rows[0]);});
  document.addEventListener('keydown',e=>{if(e.defaultPrevented||e.ctrlKey||e.metaKey||e.altKey||e.isComposing||document.fullscreenElement||document.querySelector('dialog[open]'))return;
   const shortcut=[...document.querySelectorAll('[data-fkey]')].find(a=>a.dataset.fkey===e.key);if(shortcut){e.preventDefault();if(shortcut.dataset.browseMode)setMode(shortcut.dataset.browseMode);else location.href=shortcut.href;return;}
-  if(e.target.closest('input,textarea,select,video,audio,[contenteditable=true]'))return;
+  if(e.target.closest('input,textarea,select,video,audio,[role=slider]')||e.target.isContentEditable)return;
+  const letter=e.key.toLowerCase();
+  if(letter==='q'||letter==='e'){e.preventDefault();if(!e.repeat)setMode(letter==='q'?'sections':'threads');return;}
   const inTree=pane.contains(document.activeElement),wide=matchMedia('(min-width:1280px)').matches;
   if(article){
    if(['Escape','ArrowLeft'].includes(e.key)&&!inTree){e.preventDefault();if(e.repeat)return;if(wide){const target=active||rows.find(x=>x.url===route)||rows[0];if(target)focus(target.id);}else location.href=base+'?folder='+encodeURIComponent(origin||'root')+'&selected='+encodeURIComponent(route)+'&browse='+mode;return;}

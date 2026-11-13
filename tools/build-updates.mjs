@@ -1,0 +1,10 @@
+import fs from 'node:fs/promises';
+import path from 'node:path';
+import {fileURLToPath} from 'node:url';
+import {updates} from './updates-data.mjs';
+const site=path.resolve(path.dirname(fileURLToPath(import.meta.url)),'..');
+const esc=s=>String(s).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+const template=await fs.readFile(path.join(site,'about/index.html'),'utf8');
+const body=`<div class="page-intro"><p class="eyebrow">The lab keeps growing</p><h1>Latest additions</h1><p class="lede">New work, recovered projects, and substantial additions to the stories already here.</p></div><div class="prose"><p>The dates here are when something was added to this site. The work itself may be years older. Small corrections and changes to the navigation won’t send another update.</p><p><a data-rss-link href="/rss.xml">Subscribe by RSS ↗</a></p><p>RSS lets you follow this page in a feed reader without giving me your email address. Copy the RSS link into your reader to subscribe.</p><p class="rss-preview-note">For now this feed lives on the private preview. Your reader must be able to reach this Tailscale site; a cloud-based reader usually cannot. There will be a public feed when the website is published.</p></div><ol class="theme-trail updates-list">${updates.map(u=>`<li id="${esc(u.id)}"><p class="theme-label"><time datetime="${u.date}">${u.date.slice(0,10)}</time> / added to the site</p><h2><a href="${u.url}">${esc(u.title)} ↗</a></h2><p>${esc(u.description)}</p></li>`).join('')}</ol>`;
+await fs.mkdir(path.join(site,'updates'),{recursive:true});
+await fs.writeFile(path.join(site,'updates/index.html'),template.replace(/<title>[\s\S]*?<\/title>/,'<title>Latest additions · 146 Lab</title>').replace(/<main\b[^>]*>[\s\S]*?<\/main>/,`<main id="main" class="reading-page">${body}</main>`));

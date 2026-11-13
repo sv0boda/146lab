@@ -1,0 +1,77 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="robots" content="noindex,nofollow">
+<title>Morse converter · 146 Lab · archive</title>
+<meta name="description" content="Writing, experiments and notes by Vlad Svoboda.">
+<link rel="icon" href="/favicon.ico">
+<link rel="preload" href="/assets/fonts/DepartureMono-Regular.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="stylesheet" href="/assets/lab.css">
+<link rel="stylesheet" href="/assets/studies.css">
+<script defer src="/assets/lab.js">
+</script>
+<script defer src="/assets/studies.js">
+</script>
+<script defer src="/assets/contact.js"></script></head>
+<body class="study archive" data-mode="archive" data-route="/morse/">
+<a class="skip" href="#main">Skip to content</a>
+<div class="study-bar">
+<a href="/study/">Design studies / 01</a>
+<a class="mode-switch" href="/study/terminal/morse/">View as terminal ↗</a>
+</div>
+<div class="site-frame">
+<header class="study-header">
+<a href="/study/archive/" class="study-brand" aria-label="146 Lab home">[146<span>LAB</span>]</a>
+<nav aria-label="Main navigation">
+<a href="/study/archive/" >Home</a>
+<a href="/study/archive/all/" >All pages</a>
+<a href="/study/archive/writing/" >Writing</a>
+<a href="/study/archive/experiments/" >Experiments</a>
+<a href="/study/archive/about/" >About</a>
+</nav>
+</header>
+<main id="main" class="reading-page ">
+<div class="page-intro">
+<p class="eyebrow">Signals / a small tool</p>
+<h1>Morse converter</h1>
+<p class="lede">A different way to say it.</p>
+</div>
+<div class="morse-module">
+<label for="morse-input">Message</label>
+<textarea id="morse-input" rows="5" spellcheck="false" placeholder="Write something, or enter dots and dashes…">
+</textarea>
+<p class="small">Separate Morse letters with spaces, and words with /.</p>
+<div class="morse-actions">
+<button type="button" id="decode">Decode → text</button>
+<button type="button" id="encode">Encode → Morse</button>
+<button type="button" id="morse-clear">Clear</button>
+</div>
+<h2 class="output-label">Received</h2>
+<output id="morse-output" aria-live="polite">Waiting for a signal.</output>
+<p id="morse-status" role="status">
+</p>
+</div>
+<details class="morse-key">
+<summary>The alphabet [+]</summary>
+<div id="morse-alphabet">
+</div>
+</details>
+</main>
+<footer class="study-footer">
+<div>
+<span>146 Lab / Vlad Svoboda</span>
+<a href="/study/archive/all/">All pages</a>
+<a href="#contact" data-contact="telegram">Contact ↗</a>
+<a href="/about/original/">The original lab ↗</a>
+</div>
+<a class="morse-egg" href="/study/archive/morse/#..%20%2F%20.-..%20---%20...-%20.%20%2F%20-.--%20---%20..-" aria-label="Open this message in the Morse converter">.. / .-.. --- ...- . / -.-- --- ..-</a>
+<div class="footer-colophon">
+<span>Made of words, mostly.</span>
+<a href="https://departuremono.com/">Departure Mono / Helena Zhang</a>
+</div>
+</footer>
+</div>
+</body>
+</html>

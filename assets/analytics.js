@@ -4,7 +4,7 @@
  const settings=document.currentScript;
  const hosts=['146lab.com','www.146lab.com'];
  if(location.protocol!=='https:'||!hosts.includes(location.hostname)||/^\/tracker(?:\/|$)/i.test(location.pathname))return;
- if([1,'1','yes'].includes(navigator.doNotTrack||window.doNotTrack||navigator.msDoNotTrack))return;
+ // Site policy: collect with Do Not Track enabled; keep the explicit opt-out.
  try{if(localStorage.getItem('umami.disabled'))return;}catch{}
  const route=document.body.dataset.route,variant=document.body.dataset.variant;
  if(!route?.startsWith('/')||!['index','commander'].includes(variant))return;
@@ -89,7 +89,7 @@
  script.src=source;script.defer=true;
  script.dataset.websiteId=website;
  script.dataset.autoTrack='false';
- script.dataset.doNotTrack='true';
+ script.dataset.doNotTrack='false';
  script.dataset.excludeSearch='true';
  script.dataset.excludeHash='true';
  script.dataset.domains=hosts.join(',');

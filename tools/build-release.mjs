@@ -6,6 +6,9 @@ import {fileURLToPath} from 'node:url';
 const root=path.resolve(path.dirname(fileURLToPath(import.meta.url)),'..');
 const out=path.join(root,'_site');
 const origin='https://www.146lab.com';
+const analytics=JSON.parse(await fs.readFile(path.join(root,'tools/analytics-config.json'),'utf8'));
+if(Boolean(analytics.scriptUrl)!==Boolean(analytics.websiteId))throw Error('Analytics requires both scriptUrl and websiteId.');
+if(analytics.scriptUrl&&(new URL(analytics.scriptUrl).protocol!=='https:'||!/^\w{8}-\w{4}-\w{4}-\w{4}-\w{12}$/.test(analytics.websiteId)))throw Error('Analytics requires an HTTPS script URL and a website UUID.');
 const iconLinks="<link rel=\"icon\" href=\"/favicon.ico?v=blue-cursor-1\" sizes=\"any\"><link rel=\"icon\" type=\"image/svg+xml\" href=\"/assets/favicon.svg?v=blue-cursor-1\"><link rel=\"apple-touch-icon\" sizes=\"180x180\" href=\"/apple-touch-icon.png?v=blue-cursor-1\"><link rel=\"manifest\" href=\"/site.webmanifest?v=blue-cursor-1\">";
 const withIcons=html=>html.replace(/<link\b[^>]*rel="(?:icon|apple-touch-icon|manifest)"[^>]*>/g,'').replace('</head>',iconLinks+'</head>');
 await fs.rm(out,{recursive:true,force:true});
@@ -17,6 +20,7 @@ const copy=async rel=>{
 for(const rel of ['assets','tracker','www','about/original','146.mp3','favicon.ico','favicon-16x16.png','favicon-32x32.png','apple-touch-icon.png','android-chrome-192x192.png','android-chrome-512x512.png','site.webmanifest','study/index','study/commander'])await copy(rel);
 const put=async(rel,text)=>{await fs.mkdir(path.dirname(path.join(out,rel)),{recursive:true});await fs.writeFile(path.join(out,rel),text);};
 const escape=s=>s.replaceAll('&','&amp;').replaceAll('"','&quot;').replaceAll('<','&lt;');
+const analyticsTag=analytics.scriptUrl?`<script defer src="/assets/analytics.js" data-analytics-source="${escape(analytics.scriptUrl)}" data-website-id="${escape(analytics.websiteId)}"></script>`:'';
 async function publicHTML(rel){
  const file=path.join(out,rel);
  let html=await fs.readFile(file,'utf8');
@@ -25,7 +29,7 @@ async function publicHTML(rel){
   .replace(/<title>(.*?) · (?:Index|Commander) · 146 Lab<\/title>/,'<title>$1 · 146 Lab</title>');
  const route='/'+rel.replace(/index\.html$/,'');
  const canonical=origin+route.replace('/study/commander/','/study/index/');
- html=html.replace('</head>',`<link rel="canonical" href="${canonical}"></head>`);
+ html=html.replace('</head>',`<link rel="canonical" href="${canonical}">${analyticsTag}</head>`);
  await fs.writeFile(file,withIcons(html));
 }
 const routes=[];

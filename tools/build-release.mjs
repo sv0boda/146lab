@@ -6,6 +6,8 @@ import {fileURLToPath} from 'node:url';
 const root=path.resolve(path.dirname(fileURLToPath(import.meta.url)),'..');
 const out=path.join(root,'_site');
 const origin='https://www.146lab.com';
+const iconLinks="<link rel=\"icon\" href=\"/favicon.ico?v=blue-cursor-1\" sizes=\"any\"><link rel=\"icon\" type=\"image/svg+xml\" href=\"/assets/favicon.svg?v=blue-cursor-1\"><link rel=\"apple-touch-icon\" sizes=\"180x180\" href=\"/apple-touch-icon.png?v=blue-cursor-1\"><link rel=\"manifest\" href=\"/site.webmanifest?v=blue-cursor-1\">";
+const withIcons=html=>html.replace(/<link\b[^>]*rel="(?:icon|apple-touch-icon|manifest)"[^>]*>/g,'').replace('</head>',iconLinks+'</head>');
 await fs.rm(out,{recursive:true,force:true});
 await fs.mkdir(out,{recursive:true});
 const copy=async rel=>{
@@ -24,7 +26,7 @@ async function publicHTML(rel){
  const route='/'+rel.replace(/index\.html$/,'');
  const canonical=origin+route.replace('/study/commander/','/study/index/');
  html=html.replace('</head>',`<link rel="canonical" href="${canonical}"></head>`);
- await fs.writeFile(file,html);
+ await fs.writeFile(file,withIcons(html));
 }
 const routes=[];
 async function walk(dir){
@@ -40,6 +42,7 @@ async function walk(dir){
 }
 await walk('study/index');await walk('study/commander');
 let entrance=await fs.readFile(path.join(root,'study/index.html'),'utf8');
+entrance=withIcons(entrance);
 entrance=entrance.replace(/<meta name="robots" content="noindex,nofollow">/g,'');
 await put('index.html',entrance.replace('</head>',`<link rel="canonical" href="${origin}/"></head>`));
 await put('study/index.html',entrance.replace('</head>',`<link rel="canonical" href="${origin}/"></head>`));

@@ -5,7 +5,7 @@ import {fileURLToPath} from 'node:url';
 const site=path.resolve(path.dirname(fileURLToPath(import.meta.url)),'..');
 const esc=s=>String(s).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
 const plain=s=>s.replace(/<[^>]*>/g,'').replace(/&amp;/g,'&').replace(/&#39;/g,"'").replace(/&quot;/g,'"').trim();
-const morse='..-. ..- -.-. -.- / -.-- --- ..- / -.--. .--- -.- / -.- . -.- / .. .-.. -.-- -.--.-';
+const morse='.. / .-.. --- ...- . / -.-- --- ..-';
 const pages=[];
 async function collect(dir){for(const f of await fs.readdir(path.join(site,dir),{withFileTypes:true})){
  const rel=path.posix.join(dir,f.name);if(rel==='about/original')continue;

@@ -1,10 +1,13 @@
+import './build-updates.mjs';
+import './build-themes.mjs';
+import {themes} from './themes-data.mjs';
 import fs from 'node:fs/promises';
 import path from 'node:path';
 import {fileURLToPath} from 'node:url';
 export const site=path.resolve(path.dirname(fileURLToPath(import.meta.url)),'..');
 export const esc=s=>String(s??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
 export const plain=s=>s.replace(/<[^>]*>/g,'').replace(/&amp;/g,'&').replace(/&#39;/g,"'").replace(/&quot;/g,'"').trim();
-export const egg='..-. ..- -.-. -.- / -.-- --- ..- / -.--. .--- -.- / -.- . -.- / .. .-.. -.-- -.--.-';
+export const egg='.. / .-.. --- ...- . / -.-- --- ..-';
 export const pages=[];
 async function collect(dir){for(const f of await fs.readdir(path.join(site,dir),{withFileTypes:true})){
  const rel=path.posix.join(dir,f.name);if(rel==='about/original')continue;
@@ -12,23 +15,19 @@ async function collect(dir){for(const f of await fs.readdir(path.join(site,dir),
   const html=await fs.readFile(path.join(site,rel),'utf8'),main=html.match(/<main\b[^>]*>([\s\S]*?)<\/main>/),h1=html.match(/<h1[^>]*>([\s\S]*?)<\/h1>/);
   if(!main||!h1||/http-equiv="refresh"/i.test(html))continue;
   const url='/'+rel.replace(/index.html$/,'');
-  const titles={'/writing/':'Writing','/writing/book/':'The book','/experiments/':'Experiments','/experiments/belka/ru/':'Belka (Russian)','/about/':'About Vlad','/questions/':'Questions'};
+  const titles={'/writing/en/':'Articles','/writing/':'Writing','/writing/book/':'The book','/experiments/':'Experiments','/experiments/belka/ru/':'Belka (Russian)','/about/':'About Vlad','/questions/':'Threads'};
   const kind=/^\/(writing\/(en|ru)|experiments)\/[^/]+\//.test(url)?(url.startsWith('/experiments/')?'Experiment':'Writing'):'Index';
-  pages.push({url,title:titles[url]||plain(h1[1]),body:main[1],reading:/<main[^>]*reading-page/.test(html),lang:html.match(/<html lang="([^"]+)"/)?.[1]||'en',kind,
+  pages.push({url,title:titles[url]||plain(h1[1]),body:main[1],reading:/<main[^>]*reading-page/.test(html),lang:html.match(/<html lang="([^"]+)"/)?.[1]||'en',kind:url.startsWith('/personal/')&&url!=='/personal/'?'Personal':kind,
    desc:plain(html.match(/<p class="lede">([\s\S]*?)<\/p>/)?.[1]||html.match(/<meta name="description" content="([^"]*)"/)?.[1]||''),
    excerpt:plain(main[1].match(/<(?:article|div) class="prose"[^>]*>\s*<p>([\s\S]*?)<\/p>/)?.[1]||''),
    date:(plain(html.match(/<time[^>]*>(.*?)<\/time>/s)?.[1]||html.match(/<p class="eyebrow">(.*?)<\/p>/s)?.[1]||'').match(/20\d\d/)||['—'])[0]});
  }
 }}
-for(const dir of ['writing','experiments','about','questions'])await collect(dir);
+for(const dir of ['writing','experiments','personal','about','questions','updates'])await collect(dir);
 export const get=url=>pages.find(p=>p.url===url);
-export const logo=(await fs.readFile(path.join(site,'about/original/index.html'),'utf8')).match(/<pre>([\s\S]*?)<\/pre>/)[1].replace(/<[^>]*>/g,'').replace(/^\n/,'').trimEnd();
-export const questions=[
- {q:'How do we make experience visible?',short:'Perception',urls:['/experiments/belka/','/writing/en/soul-internet/']},
- {q:'What does freedom ask of us?',short:'Freedom',urls:['/writing/en/is-freedom-a-lack-of-responsibility/','/experiments/greed-is-god/','/experiments/belka/']},
- {q:'What changes when a story changes medium?',short:'Storytelling',urls:['/experiments/bmw-850-ci/','/writing/book/','/experiments/ocean-within/']}
-];
-export const selected=['/experiments/belka/','/writing/en/how-i-met-your-dog/','/experiments/greed-is-god/','/experiments/ocean-within/'].map(get);
+export const logo=(await fs.readFile(path.join(site,'about/original/index.html'),'utf8')).match(/<pre>([\s\S]*?)<\/pre>/)[1].replace(/<[^>]*>/g,'').replace(/^\n/,'').replace(/[YSL]/g,' ').trimEnd();
+export const questions=themes;
+export const selected=['/experiments/belka/','/writing/en/how-i-met-your-dog/','/experiments/greed-is-god/','/experiments/ocean-within/','/writing/en/a-sunny-day/'].map(get);
 export const variants=[
  {id:'index',code:'A1',name:'Index',family:'archive',desc:'A compact directory. White space, blue links, quiet reading.',gesture:'Browse a name; follow its connections.'},
  {id:'atlas',code:'A2',name:'Atlas',family:'archive',desc:'Text makes the map. Branches, coordinates and paths between work.',gesture:'Choose a question to trace a different route.'},

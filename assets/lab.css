@@ -5,3 +5,14 @@
 .project-media{margin:38px 0}.project-media--lead{margin:30px 0 45px}.project-media>a{display:block}.project-media img{display:block;width:100%;height:auto;margin:0}.project-media video{display:block;width:100%;height:auto;aspect-ratio:16/9;background:#202821}.project-media figcaption{margin-top:12px;color:var(--muted);font:11px/1.7 var(--mono);max-width:690px}.project-media video:focus-visible{outline:2px solid var(--link);outline-offset:5px}
 
 .sources{display:flex;flex-wrap:wrap;gap:12px 24px}
+
+/* Portrait details retain their full frame and open in the existing image viewer. */
+.apartment-photo-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:10px;max-width:560px;margin:30px auto;align-items:start}
+.apartment-photo-grid a{display:block;min-width:0;line-height:0}
+.apartment-photo-grid img{display:block;width:100%;height:auto}
+.apartment-photo-grid a:last-child:nth-child(odd){grid-column:1/-1;width:calc(50% - 6px);justify-self:center}
+@media(max-width:380px){.apartment-photo-grid{gap:8px}.apartment-photo-grid a:last-child:nth-child(odd){width:calc(50% - 4px)}}
+
+@media(max-width:480px){.apartment-photo-grid{grid-template-columns:repeat(2,minmax(0,1fr));max-width:320px}}
+
+.apartment-photo-grid>figure{margin:0;min-width:0}.apartment-photo-grid>figure a{width:100%!important}

@@ -2,9 +2,16 @@
  'use strict';
  const $=s=>document.querySelector(s),$$=s=>[...document.querySelectorAll(s)];
  const variant=document.body.dataset.variant,base='/study/'+variant;
+ $$('[data-view-link]').forEach(a=>{const url=new URL(a.href);url.search=location.search;url.hash=location.hash;a.href=url.href;a.addEventListener('click',e=>{
+  if(window.labMobileAppearance?.matches&&variant==='index'){
+   e.preventDefault();
+   window.labSetMobilePalette(document.documentElement.dataset.mobilePalette==='blue'?'dark':'blue');
+  }else try{localStorage.setItem('146lab-view',a.dataset.viewLink);}catch{}
+ });});
+
  let directoryPromise;
  const directory=()=>directoryPromise??=(fetch('/assets/lab-directory.json').then(r=>{if(!r.ok)throw new Error('The directory could not be loaded.');return r.json();}).catch(e=>{directoryPromise=undefined;throw e;}));
- $('.version-picker select')?.addEventListener('change',e=>{const url=new URL(e.target.value,location.origin);url.search=location.search;url.hash=location.hash;location.href=url.href;});
+ $('.version-picker select')?.addEventListener('change',e=>{const url=new URL(e.target.value,location.origin);url.search=location.search;url.hash=location.hash;try{localStorage.setItem('146lab-view',url.pathname.split('/')[2]);}catch{}location.href=url.href;});
  for(const b of $$('[data-question]'))b.addEventListener('click',()=>{
   $$('[data-question]').forEach(x=>x.setAttribute('aria-pressed',String(x===b)));
   $$('[data-thread]').forEach(x=>x.hidden=x.dataset.thread!==b.dataset.question);
@@ -20,28 +27,6 @@
  // BBS numbers are shortcuts for the visible numbered menu, with ordinary links as fallback.
  if(variant==='bbs')document.addEventListener('keydown',e=>{if(typing(e.target)||e.ctrlKey||e.metaKey||e.altKey)return;const fixed={'0':'/','5':'/all/'};const a=$$('[data-bbs-key]').find(n=>n.dataset.bbsKey===e.key);if(a){e.preventDefault();location.href=a.href;}else if(fixed[e.key]){e.preventDefault();location.href=base+fixed[e.key];}});
  const files=$$('[data-file]');
- if(variant==='commander'){
-  let active=files[0]||null,previewGeneration=0;
-  async function preview(a){active=a;files.forEach(x=>x.setAttribute('aria-current',String(x===a)));const generation=++previewGeneration;const holder=$('#file-preview');if(!holder)return;
-   try{const {pages}=await directory();if(generation!==previewGeneration)return;const p=pages.find(x=>x.url===a.dataset.file);if(!p)return;holder.replaceChildren();
-    function text(tag,cls,value){const el=document.createElement(tag);el.className=cls;el.textContent=value;holder.append(el);return el;}
-    text('p','preview-path',p.url);text('h2','',p.title);text('p','preview-meta',`${p.kind.toUpperCase()} / ${p.date}`);text('p','preview-description',p.desc||'An entrance to the laboratory.');
-    if(p.excerpt)text('p','preview-excerpt',p.excerpt.length>300?p.excerpt.slice(0,300).replace(/\s+\S*$/,'')+'…':p.excerpt);
-    const open=text('a','preview-open','[ Enter / read file ]');open.href=base+p.url;
-   }catch(e){holder.textContent=e.message;const a2=document.createElement('a');a2.className='preview-open';a2.href=a.href;a2.textContent='Open the file →';holder.append(a2);}
-  }
-  files.forEach(a=>{a.addEventListener('click',e=>{if(e.metaKey||e.ctrlKey||e.shiftKey||e.altKey)return;e.preventDefault();preview(a);});a.addEventListener('dblclick',()=>{location.href=a.href;});a.addEventListener('keydown',e=>{if(e.key==='Enter'){e.preventDefault();location.href=a.href;}});a.addEventListener('focus',()=>preview(a));});
-  $('#file-search')?.addEventListener('input',e=>{let n=0;const q=e.target.value.toLocaleLowerCase().trim();files.forEach(a=>{a.hidden=!a.textContent.toLocaleLowerCase().includes(q);if(!a.hidden)n++;});$('#file-count').textContent=`${n} files`;$('.file-empty').hidden=n>0;const first=files.find(a=>!a.hidden);if(first)preview(first);else{active=null;$('#file-preview').textContent='No files match. Clear the search to browse again.';}});
-  function read(){if(active)location.href=active.href;else if(!files.length)location.href=base+'/all/';}
-  $('#commander-read')?.addEventListener('click',read);
-  document.addEventListener('keydown',e=>{
-   if(e.ctrlKey||e.metaKey||e.altKey)return;
-   const shortcut=$$('[data-fkey]').find(n=>n.dataset.fkey===e.key);if(shortcut){e.preventDefault();location.href=shortcut.href;return;}if(e.key==='F3'){e.preventDefault();read();return;}
-   if(typing(e.target)||!files.length)return;
-   if(e.key==='ArrowDown'||e.key==='ArrowUp'){e.preventDefault();const visible=files.filter(a=>!a.hidden);if(!visible.length)return;const index=Math.max(0,visible.indexOf(active));const next=visible[Math.max(0,Math.min(visible.length-1,index+(e.key==='ArrowDown'?1:-1)))];next.focus({preventScroll:true});next.scrollIntoView({block:'nearest'});}
-   else if(e.key==='Enter'&&!e.target.closest('a,button,summary')){e.preventDefault();read();}
-  });
- }
  // T1: a small virtual filesystem of published pages. Commands never execute on the host.
  const form=$('#shell-form');
  if(form){
